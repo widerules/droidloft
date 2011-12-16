@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="isometric" width="10" height="10" tilewidth="64" tileheight="32">
+ <tileset firstgid="1" name="Untitled" tilewidth="64" tileheight="32">
+  <image source="iso.png"/>
+ </tileset>
+ <layer name="Layer 0" width="10" height="10" visible="1" opacity="0.43">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA2NkYGBgHMWDBgMAjw2X0pABAAA=
+  </data>
+ </layer>
+ <layer name="Layer 1" width="10" height="10" visible="1">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA2NmwARMOOjhAJhwsJlxqMPmd2YkmgmHGmS1yOqwqWdGwgDg7sqJkAEAAA==
+  </data>
+ </layer>
+ <layer name="Layer 2" width="10" height="10" visible="1">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA2NgGFqAGYqppW6wAQDMTJpEkAEAAA==
+  </data>
+ </layer>
+ <objectgroup color="#a4363a" name="Object Layer 1" width="10" height="10">
+  <properties>
+   <property name="weather" value="1"/>
+  </properties>
+  <object name="location" type="person" x="191" y="65" width="34" height="30">
+   <properties>
+    <property name="favorite" value="icecream"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>
