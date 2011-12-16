@@ -1,37 +1,24 @@
 package com.droidloft;
 
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 import java.nio.ShortBuffer;
 
 import javax.microedition.khronos.opengles.GL10;
 
 public class Square {
-	private float[] vertices={
-			-0.5f, 0.5f,0.0f,//0,top left
-			-0.5f,-0.5f,0.0f,//1,bottom left
-			 0.5f,-0.5f,0.0f,//2,bottom right
-			 0.5f, 0.5f,0.0f,//3,top right
-			};
-	
-	private short[] indices={0,1,2,0,2,3};
 	private FloatBuffer vertexBuffer;
 	private ShortBuffer indexBuffer;
 	public Square(){
-		ByteBuffer vbb=ByteBuffer.allocateDirect(vertices.length*4);
-		vbb.order(ByteOrder.nativeOrder());
-		vertexBuffer=vbb.asFloatBuffer();
-		vertexBuffer.put(vertices);
-		vertexBuffer.position(0);
+		float[] vertices={
+				-0.5f, 0.5f,0.0f,//0,top left
+				-0.5f,-0.5f,0.0f,//1,bottom left
+				 0.5f,-0.5f,0.0f,//2,bottom right
+				 0.5f, 0.5f,0.0f,//3,top right
+				};
+		vertexBuffer=Util.convertToFloatBuffer(vertices);
 		
-		ByteBuffer ibb=ByteBuffer.allocateDirect(indices.length*2);
-		ibb.order(ByteOrder.nativeOrder());
-		indexBuffer=ibb.asShortBuffer();
-		indexBuffer.put(indices);
-		indexBuffer.position(0);
-		
-		
+		short[] indices={0,1,2,0,2,3};
+		indexBuffer=Util.convertToShortBuffer(indices);
 	}
 	
 	public void draw(GL10 gl){
@@ -40,8 +27,8 @@ public class Square {
 		gl.glCullFace(GL10.GL_BACK);
 		gl.glEnableClientState(GL10.GL_VERTEX_ARRAY);
 		
-		gl.glVertexPointer(3, GL10.GL_FLOAT, 0,vertexBuffer);//3 vertex per group
-		gl.glDrawElements(GL10.GL_TRIANGLES, indices.length,
+		gl.glVertexPointer(3, GL10.GL_FLOAT, 0,vertexBuffer);//3 elements(xyz) per group
+		gl.glDrawElements(GL10.GL_TRIANGLES, 6,/*indices.length*/
 				GL10.GL_UNSIGNED_SHORT, indexBuffer);
 		//gl.glDrawArrays(mode, first, count);
 		
