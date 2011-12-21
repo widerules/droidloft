@@ -3,7 +3,7 @@
           package="org.cocos2d"
           android:versionCode="5"
           android:versionName="1.0.3">
-    <application android:label="@string/app_name" android:icon="@drawable/icon" android:debuggable="true">
+    <application android:label="@string/app_name" android:icon="@drawable/icon" android:debuggable="false">
         <activity android:name=".Cocos2D"
                   android:label="@string/app_name">
             <intent-filter>
