@@ -174,6 +174,32 @@ public class Box2dTest extends Activity {
             Vector2 topRight = new Vector2(scaledWidth,scaledHeight);
             Vector2 bottomRight = new Vector2(scaledWidth,0f);
             
+            Vector2[] vec=new Vector2[2];
+            
+            // bottom
+            vec[0]=bottomLeft;
+            vec[1]=bottomRight;
+            groundBox.set(vec);
+            groundBody.createFixture(groundBox,0);
+            
+            // top
+            vec[0]=topLeft;
+            vec[1]=topRight;
+            groundBox.set(vec);
+            groundBody.createFixture(groundBox,0);
+            
+            // left
+            vec[0]=topLeft;
+            vec[1]=bottomLeft;
+            groundBox.set(vec);
+            groundBody.createFixture(groundBox,0);
+            
+            // right
+            vec[0]=topRight;
+            vec[1]=bottomRight;
+            groundBox.set(vec);
+            groundBody.createFixture(groundBox,0);
+            /*
     		// bottom
     		groundBox.setAsEdge(bottomLeft, bottomRight);
     		groundBody.createFixture(groundBox,0);
@@ -189,6 +215,8 @@ public class Box2dTest extends Activity {
     		// right
     		groundBox.setAsEdge(topRight, bottomRight);
     		groundBody.createFixture(groundBox,0);
+    		
+    		*/
                                     
             //Set up sprite
              CCSpriteSheet mgr = CCSpriteSheet.spriteSheet("blocks.png", 150);
