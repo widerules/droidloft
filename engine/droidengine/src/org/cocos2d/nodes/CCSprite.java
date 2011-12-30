@@ -267,6 +267,14 @@ public class CCSprite extends CCNode implements CCRGBAProtocol, CCTextureProtoco
     public static CCSprite sprite(String filepath) {
         return new CCSprite(filepath);
     }
+    
+    /** Creates an sprite with an image filepath.
+    The rect used will be the size of the image.
+    The offset will be (0,0).
+    */
+  public static CCSprite sprite(int resId) {
+      return new CCSprite(resId);
+  }
 
     /** Creates an sprite with an image filepath and a rect.
       The offset will be (0,0).
@@ -373,6 +381,23 @@ public class CCSprite extends CCNode implements CCRGBAProtocol, CCTextureProtoco
 		ccMacros.CCLOGERROR("CCSprite", "Unable to load texture from file: " + filepath);
         }
     }
+    
+    
+    /** Initializes an sprite with an image filepath.
+    The rect used will be the size of the image.
+    The offset will be (0,0).
+    */
+  public CCSprite(int resId) {
+
+      CCTexture2D texture = CCTextureCache.sharedTextureCache().addImage(resId);
+      if( texture != null) {
+          CGRect rect = CGRect.make(0, 0, 0, 0);
+          rect.size = texture.getContentSize();
+          init(texture, rect);
+      } else {
+		ccMacros.CCLOGERROR("CCSprite", "Unable to load texture from resId: " + resId);
+      }
+  }
 
     public CCSprite() {
     	init();

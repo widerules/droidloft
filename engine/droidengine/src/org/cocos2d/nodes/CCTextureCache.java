@@ -3,7 +3,6 @@ package org.cocos2d.nodes;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.ref.SoftReference;
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
 
@@ -68,6 +67,26 @@ public class CCTextureCache {
         if (tex == null) {
             tex = createTextureFromFilePath(path);
             textures.put(path, new WeakReference<CCTexture2D>(tex));
+        }
+        return tex;
+    }
+    
+    /** Returns a Texture2D object given an file image resId
+     * If the file image was not previously loaded, it will create a new CCTexture2D
+     *  object and it will return it. It will use the Integer resId as a key.
+     * Otherwise it will return a reference of a previosly loaded image.
+     * Supported image extensions: .png, .bmp, .tiff, .jpeg, .pvr, .gif
+     */
+    public CCTexture2D addImage(int resId) {
+
+        WeakReference<CCTexture2D> texSR = textures.get("image"+resId);
+        CCTexture2D tex = null;
+        if(texSR != null)
+        	tex = texSR.get();
+
+        if (tex == null) {
+            tex = createTextureFromResourceId(resId);
+            textures.put("image"+resId, new WeakReference<CCTexture2D>(tex));
         }
         return tex;
     }
@@ -224,6 +243,24 @@ public class CCTextureCache {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+			}
+		});
+        
+        return tex;
+    }
+    
+    private static CCTexture2D createTextureFromResourceId(final int resId) {
+        
+    	CCTexture2D tex = new CCTexture2D();
+        tex.setLoader(new GLResourceHelper.GLResourceLoader() {
+			
+			@Override
+			public void load(Resource res) {
+		        	
+		        	BitmapFactory.Options opts = new BitmapFactory.Options();
+		        	opts.inPreferredConfig = ((CCTexture2D)res).pixelFormat();
+		        	Bitmap bmp = BitmapFactory.decodeResource(CCDirector.sharedDirector().getActivity().getResources(), resId,opts);
+					((CCTexture2D)res).initWithImage(bmp);
 			}
 		});
         
