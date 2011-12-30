@@ -70,7 +70,16 @@ public class CCSpriteSheet extends CCNode implements CCTextureProtocol {
     public static CCSpriteSheet spriteSheet(String fileImage) {
         return new CCSpriteSheet(fileImage, defaultCapacity);
     }
-
+    
+    /** creates a CCSpriteSheet with a file image resId(.png, .jpeg, .pvr, etc) with a default capacity of 29 children.
+    The capacity will be increased in 33% in runtime if it run out of space.
+    The file will be loaded using the TextureMgr.
+    */
+    /*
+  public static CCSpriteSheet spriteSheet(int resId) {
+      return new CCSpriteSheet(resId, defaultCapacity);
+  }
+*/
     /** creates a CCSpriteSheet with a file image (.png, .jpeg, .pvr, etc) and capacity of children.
       The capacity will be increased in 33% in runtime if it run out of space.
       The file will be loaded using the TextureMgr.
@@ -78,7 +87,16 @@ public class CCSpriteSheet extends CCNode implements CCTextureProtocol {
     public static CCSpriteSheet spriteSheet(String fileImage, int capacity) {
         return new CCSpriteSheet(fileImage, capacity);
     }
-
+    
+    /** creates a CCSpriteSheet with a file image (.png, .jpeg, .pvr, etc) and capacity of children.
+    The capacity will be increased in 33% in runtime if it run out of space.
+    The file will be loaded using the TextureMgr.
+    */
+    /*//remove this, because it will cause a split image
+  public static CCSpriteSheet spriteSheet(int resId, int capacity) {
+      return new CCSpriteSheet(resId, capacity);
+  }
+*/
     /** initializes a CCSpriteSheet with a texture2d and capacity of children.
       The capacity will be increased in 33% in runtime if it run out of space.
       */
@@ -100,6 +118,19 @@ public class CCSpriteSheet extends CCNode implements CCTextureProtocol {
     protected CCSpriteSheet(String fileImage, int capacity) {
         this(CCTextureCache.sharedTextureCache().addImage(fileImage), capacity);
     }
+    
+    
+    /** 
+    @deprecated may cause splited image ,don't use it, unless you know what you are doing
+    initializes a CCSpriteSheet with a file image (.png, .jpeg, .pvr, etc) and a capacity of children.
+    The capacity will be increased in 33% in runtime if it run out of space.
+    The file will be loaded using the TextureMgr.
+    */
+   
+  protected CCSpriteSheet(int resId, int capacity) {
+      this(CCTextureCache.sharedTextureCache().addImage(resId), capacity);
+  }
+  
 
     /** creates an sprite with a rect in the CCSpriteSheet.
       It's the same as:
